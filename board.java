@@ -4,8 +4,8 @@ public class board {
 
 	board() {
 		for (int i=0; i<8; i++) {
-			mainBoard[0][i] = new pawn(0, i, 'b');
-			mainBoard[5][i] = new pawn(5, i, 'w');
+			mainBoard[0][i] = new pawn(i, 0, 'b');
+			mainBoard[5][i] = new pawn(i, 5, 'w');
 		}
 	}
 
@@ -26,32 +26,32 @@ public class board {
 
 
 	public static boolean boardMovement(pawn[][] mainBoard, int initpos, int finpos) {
-		int initposy = (initpos/10)%10;	System.out.println("initposx: " + initposy);
-		int initposx = initpos%10;	System.out.println("initposy: " + initposx);
+		int initposx = (initpos/10)%10;	System.out.println("initposx: " + initposx);
+		int initposy = initpos%10;	System.out.println("initposy: " + initposy);
 
-		if (mainBoard[initposx][initposy] != null) {
-			int finaly = (finpos/10)%10; System.out.println("finalx: " + finaly);
-			int finalx = finpos%10; System.out.println("finaly: " + finalx);
+		if (mainBoard[initposy][initposx] != null) {
+			int finalx = (finpos/10)%10; System.out.println("finalx: " + finalx);
+			int finaly = finpos%10; System.out.println("finaly: " + finaly);
 
-			if (mainBoard[finalx][finaly] == null) {	//no enemy pawn in finalpos
-					if (mainBoard[initposx][initposy].pawnMove(finalx, finaly, false)){
+			if (mainBoard[finaly][finalx] == null) {	//no enemy pawn in finalpos
+					if (mainBoard[initposy][initposx].pawnMove(finalx, finaly, false)){
 						System.out.println("line 48");
-						pawn temp = mainBoard[initposx][initposy];
-						mainBoard[initposx][initposy] = null;
-						mainBoard[finalx][finaly] = temp;
-						//remove(pawn mainBoard[initposx][initposy]);	need to remove somehow the pawn that has moved.
+						pawn temp = mainBoard[initposy][initposx];
+						mainBoard[initposy][initposx] = null;
+						mainBoard[finaly][finalx] = temp;
 						return true;
 					} else {
 						System.out.println("line 51");
 						return false;
 					}
 			} else { //enemy pawn in finalpos
-				if (mainBoard[initposx][initposy].pawnMove(initposx, initposy, true))
+				if (mainBoard[initposy][initposx].pawnMove(initposx, initposy, true))
 					return true;
 				else
 					return false;
 			}
 		}	else {
+			System.out.println("The position choosen has no pawns.");
 			return false;
 		}
 	}

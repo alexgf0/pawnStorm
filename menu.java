@@ -4,23 +4,17 @@ public class menu {
   static board myBoard = new board();
   static Scanner myScan = new Scanner(System.in);
   public static void main(String[] args) {
-  /*  board.displayBoard(board.mainBoard);
-    if (board.boardMovement(board.mainBoard, 00, 10)){
-      board.displayBoard(board.mainBoard);
-    } else {
-      System.out.println("Error.");
-    }
-    if(board.boardMovement(board.mainBoard, 10, 20)){
-      board.displayBoard(board.mainBoard);
-    }
-    */
-    int F, G;
-    for (int i=0; i<3; i++){
+    System.out.println("To exit enter 404 in the inputs.");
+    int F=0, G=0;
+    while (F!=404 || G != 404){
       G = myScan.nextInt();
       F = myScan.nextInt();
       if(board.boardMovement(board.mainBoard, G, F)) {
         board.displayBoard(board.mainBoard);
-      } else {
+      } else if (F == 404 || F == 404) {
+        System.out.println("Goodbye sir.");
+        return;
+      }else {
         System.out.println("Error.");
       }
 

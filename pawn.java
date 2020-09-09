@@ -8,40 +8,37 @@ public class pawn {
       this.color = color;
   }
 
-  public boolean pawnMove(int positx, int posity, boolean isThereEnemyPawn) {//using rn isThereEnemyPawn to create an "eating" mechanisim
-    //Check for movements of just one square
-      /*if (this.posy - posity !=1 || this.posy - posity != -1){
-        System.out.println("line 14");
-        return false;
-      }*/
-      if (this.posx - positx != 0) {  //check for lateral movement (x axis)
-        /*if (posx - positx != 1 || posx - positx != -1){
-          System.out.println("line 19");
-          return false;
-        }
-        if (!isThereEnemyPawn){
-          System.out.println("line 23");
-          return false;
-        } else {*/
-          //not sure how to manage the deletion of the other pawn.
-          System.out.println("line 27");
-          this.posx = positx;
-          this.posy = posity;
+  public boolean pawnMove(int posx, int posy, boolean isThereEnemyPawn) {//using rn isThereEnemyPawn to create an "eating" mechanisim
+
+    if ((this.posy-posy) ==1 || (this.posy-posy) == -1){   //Check if the movement is of one square
+
+      if ((this.posx-posx) == 0) {  //check for lateral movement (x axis)
+        if (!isThereEnemyPawn) { //checking for vertical pawn obstruction
+          this.posx = posx;
+          this.posy = posy;
           return true;
-        //}
-      }
-       else { //non lateral movement
-        if (isThereEnemyPawn) { //checking for pawn obstruction
-          System.out.println("line 35");
-          return false;
         } else {
-          System.out.println("line 38");
-          this.posx = positx;
-          this.posy = posity;
-          return true;
+          System.out.println("You cannot advance, there is a pawn there.");
+          return false;
         }
+      } else { // lateral movement
+        if (((this.posx-posx) == 1 || (this.posx-posx) == -1) && isThereEnemyPawn){
+          //eating mechanisism
+          this.posx = posx;
+          this.posy = posy;
+          return true;
+        } else { //lateral movement but no pawn there
+          System.out.println("There is no enemy pawn there to capture");
+          return false;
+        }
+
       }
+    } else {
+      System.out.println("You can only advance one space at a time.");
+      return false;
+    }
   }
+  
   public static void displayPawn(char color) {
      if(color == 'b') {
         System.out.print("\u2659 ");
