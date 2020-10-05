@@ -12,7 +12,9 @@ public class board {
 
 	public static void displayBoard(pawn[][] mainBoard) {
 		System.out.print("\033[H\033[2J");
+		System.out.println("   0 1 2 3 4 5 6 7");
 		for (int i=0; i<6; i++) {
+			System.out.print(i + "  ");
 			for (int j=0; j<8; j++) {
 				if (mainBoard[i][j] != null) {
 					mainBoard[i][j].displayPawn(mainBoard[i][j].color);
@@ -21,7 +23,7 @@ public class board {
 				}
 			}
 			System.out.println("");
-		}
+		}	System.out.println("   0 1 2 3 4 5 6 7");
 	}
 
 
@@ -45,12 +47,18 @@ public class board {
 						return false;
 					}
 			} else { //enemy pawn in finalpos
-				if (mainBoard[initposy][initposx].pawnMove(initposx, initposy, true))
-					return true;
-				else
+				if((finalx-initposx) == 0) {
+					System.out.println("You cannot advance there, there is a pawn there.");
 					return false;
-			}
-		}	else {
+				}	else {
+					mainBoard[finaly][finalx] = null;
+					pawn temp = mainBoard[initposy][initposx];
+					mainBoard[initposy][initposx] = null;
+					mainBoard[finaly][finalx] = temp;
+					return true;
+				}
+		}
+	}	else {
 			System.out.println("The position choosen has no pawns.");
 			return false;
 		}
