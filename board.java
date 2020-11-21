@@ -1,4 +1,3 @@
-
 public class board {
 	static pawn[][] mainBoard = new pawn[6][8];
 
@@ -8,7 +7,6 @@ public class board {
 			mainBoard[5][i] = new pawn(i, 5, 'w');
 		}
 	}
-
 
 	public static void displayBoard(pawn[][] mainBoard) {
 		System.out.print("\033[H\033[2J");
@@ -26,14 +24,15 @@ public class board {
 		}	System.out.println("   0 1 2 3 4 5 6 7");
 	}
 
-
 	public static boolean boardMovement(pawn[][] mainBoard, int initpos, int finpos) {
-		int initposx = (initpos/10)%10;	System.out.println("initposx: " + initposx);
-		int initposy = initpos%10;	System.out.println("initposy: " + initposy);
+		int initposx = (initpos/10)%10;
+		int initposy = initpos%10;
+		System.out.println("initpos (x,y): (" + initposx + "," + initposy + ")");
 
 		if (mainBoard[initposy][initposx] != null) {
-			int finalx = (finpos/10)%10; System.out.println("finalx: " + finalx);
-			int finaly = finpos%10; System.out.println("finaly: " + finaly);
+			int finalx = (finpos/10)%10;
+			int finaly = finpos%10;
+			System.out.println("finalpos (x,y): (" + finalx + "," + finaly + ")");
 
 			if (mainBoard[finaly][finalx] == null) {	//no enemy pawn in finalpos
 					if (mainBoard[initposy][initposx].pawnMove(finalx, finaly, false)){
@@ -58,10 +57,9 @@ public class board {
 					return true;
 				}
 		}
-	}	else {
+	} else {
 			System.out.println("The position choosen has no pawns.");
 			return false;
 		}
 	}
-
 }

@@ -4,7 +4,10 @@ public class menu {
   static board myBoard = new board();
   static Scanner myScan = new Scanner(System.in);
   public static void main(String[] args) {
-    System.out.println("To exit enter 404 in the inputs.");
+    board.displayBoard(board.mainBoard);
+    System.out.println("To move enter the initial position xy, press Enter and enter the final position x'y'.");
+    System.out.println("E.g. 30 (Enter) 31 (Enter)");
+    System.out.println("To exit enter 404 in the input.");
     int F=0, G=0;
     while (F!=404 || G != 404){
       G = myScan.nextInt();
@@ -17,7 +20,6 @@ public class menu {
       }else {
         System.out.println("Error.");
       }
-
     }
   }
 }
